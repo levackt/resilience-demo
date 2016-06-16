@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2015 Red Hat, Inc
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <parent>
+         <artifactId>examples</artifactId>
+         <groupId>io.fabric8.kubeflix</groupId>
+         <version>1.1-SNAPSHOT</version>
+     </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.fabric8.kubeflix.examples</groupId>
+    <artifactId>hello-hystrix</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+    <name>Kubeflix :: Examples :: Hello Hystrix</name>
+
+    <properties>
+        <docker.from>docker.io/fabric8/jetty-9:1.0.0</docker.from>
+        <fabric8.dockerUser>fabric8/</fabric8.dockerUser>
+        <docker.image>${fabric8.dockerUser}${project.artifactId}:${project.version}</docker.image>
+        <docker.assemblyDescriptorRef>rootWar</docker.assemblyDescriptorRef>
+        <docker.port.container.http>8080</docker.port.container.http>
+
+        <fabric8.service.name>${project.artifactId}</fabric8.service.name>
+        <fabric8.service.port>80</fabric8.service.port>
+        <fabric8.service.containerPort>8080</fabric8.service.containerPort>
+        <fabric8.service.type>LoadBalancer</fabric8.service.type>
+        <fabric8.readinessProbe.httpGet.path>/ready</fabric8.readinessProbe.httpGet.path>
+        <fabric8.readinessProbe.httpGet.port>8080</fabric8.readinessProbe.httpGet.port>
+        <fabric8.readinessProbe.initialDelaySeconds>5</fabric8.readinessProbe.initialDelaySeconds>
+        <fabric8.namespace>default</fabric8.namespace>
+        <fabric8.label.hystrix.enabled>true</fabric8.label.hystrix.enabled>
+        <logback.version>1.1.7</logback.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-metrics-event-stream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.netflix.archaius</groupId>
+            <artifactId>archaius-core</artifactId>
+            <version>0.6.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${docker.image}</name>
+                            <build>
+                                <from>${docker.from}</from>
+                                <assembly>
+                                    <descriptorRef>${docker.assemblyDescriptorRef}</descriptorRef>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>json</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>json</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>attach</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

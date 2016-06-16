@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  host: 0.0.0.0
+
+hello:
+  host: ${HELLO_HYSTRIX_SERVICE_HOST}
+  port: ${HELLO_HYSTRIX_SERVICE_PORT}
+
+---
+# Dev Profile
+
+spring:
+  profiles: dev
+
+server.port: 8333
