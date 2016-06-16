@@ -51,13 +51,13 @@ The dashboard originates from the [Kubeflix samples](https://github.com/fabric8i
 
   The following endpoints should be working if running locally, adjust host:port as needed;
 
-    [demo](http://localhost:8087/hello)
+   [demo](http://localhost:8087/hello)
 
-    [slow](http://localhost:8087/slow)
+   [slow](http://localhost:8087/slow)
 
-    [ready](http://localhost:8087/ready)
+   [ready](http://localhost:8087/ready)
 
-    [crash](http://localhost:8087/crash)
+   [crash](http://localhost:8087/crash)
 
 
 ## [Camel Hystrix](http://camel.apache.org/hystrix-eip.html)
