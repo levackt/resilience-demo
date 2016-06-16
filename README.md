@@ -32,7 +32,7 @@ The dashboard originates from the [Kubeflix samples](https://github.com/fabric8i
 
   Deploy to Kubernetes
 
-  `mvn clean install fabric8:json fabric8:apply`
+  `mvn clean install docker:build fabric8:json fabric8:apply`
 
   or use Jetty to run;
 
@@ -55,7 +55,7 @@ The dashboard originates from the [Kubeflix samples](https://github.com/fabric8i
 
   Deploy to Kubernetes
 
-  `mvn clean install fabric8:json fabric8:apply`
+  `mvn clean install docker:build fabric8:json fabric8:apply`
 
   or use Spring Boot to run;
 
@@ -74,7 +74,7 @@ The dashboard originates from the [Kubeflix samples](https://github.com/fabric8i
 
   `cd camel-hystrix`
 
-  `mvn clean install fabric8:json fabric8:apply`
+  `mvn clean install docker:build fabric8:json fabric8:apply`
 
   or use Spring boot
 
