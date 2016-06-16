@@ -30,17 +30,6 @@ The dashboard originates from the [Kubeflix samples](https://github.com/fabric8i
 
   `cd hello-hystrix`
 
-  `mvn clean install fabric8:json fabric8:apply`
-
-  or use Spring boot
-
-  `mvn spring-boot:run`
-
-
-## Deploy the [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html) application
-
-  `cd spring-cloud-hystrix`
-
   Deploy to Kubernetes
 
   `mvn clean install fabric8:json fabric8:apply`
@@ -51,13 +40,34 @@ The dashboard originates from the [Kubeflix samples](https://github.com/fabric8i
 
   The following endpoints should be working if running locally, adjust host:port as needed;
 
-   [demo](http://localhost:8087/hello)
+   [hello](http://localhost:8087/hello)
 
-   [slow](http://localhost:8087/slow)
+   [slow, times out](http://localhost:8087/slow)
 
-   [ready](http://localhost:8087/ready)
+   [readiness check for kubernetes](http://localhost:8087/ready)
 
-   [crash](http://localhost:8087/crash)
+   [crash, fails every other request](http://localhost:8087/crash)
+
+
+## Deploy the [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html) application
+
+  `cd spring-cloud-hystrix`
+
+  Deploy to Kubernetes
+
+  `mvn clean install fabric8:json fabric8:apply`
+
+  or use Spring Boot to run;
+
+  `mvn clean install spring-boot:run -Dspring.profiles.active=dev`
+
+  The following endpoints should be working if running locally, adjust host:port as needed;
+
+   [hello, with fallback when the above Hello service fails](http://localhost:8333/hello)
+
+   [slow, times out with fallback](http://localhost:8333/slow)
+
+   [crash, fails every other request](http://localhost:8333/crash)
 
 
 ## [Camel Hystrix](http://camel.apache.org/hystrix-eip.html)

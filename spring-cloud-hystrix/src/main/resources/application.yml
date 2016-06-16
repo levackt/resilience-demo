@@ -3,8 +3,8 @@ server:
   host: 0.0.0.0
 
 hello:
-  host: ${HELLO_HYSTRIX_SERVICE_HOST}
-  port: ${HELLO_HYSTRIX_SERVICE_PORT}
+  host: ${HELLO_HYSTRIX_SERVICE_HOST:localhost}
+  port: ${HELLO_HYSTRIX_SERVICE_PORT:8087}
 
 ---
 # Dev Profile
