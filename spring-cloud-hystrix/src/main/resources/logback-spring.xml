@@ -4,17 +4,19 @@
 
     <property name="PROJECT_ID" value="spring-cloud-hystrix"/>
 
-    <!--<logger name="com.netflix.hystrix.AbstractCommand" level="DEBUG">-->
-        <!--<appender-ref ref="CONSOLE" />-->
-    <!--</logger>-->
 
-    <logger name="demo.meetup" additivity="false" level="INFO">
+    <logger name="com.netflix.hystrix.AbstractCommand"  additivity="false" level="DEBUG">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="demo.meetup"  additivity="false" level="DEBUG">
         <appender-ref ref="CONSOLE" />
     </logger>
 
     <logger name="org.apache.camel" additivity="false" level="INFO">
         <appender-ref ref="CONSOLE" />
     </logger>
+
     <root level="ERROR">
         <appender-ref ref="CONSOLE" />
     </root>

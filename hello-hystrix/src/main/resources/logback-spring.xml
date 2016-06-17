@@ -2,24 +2,20 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <property name="PROJECT_ID" value="camel-hystrix-demo"/>
+    <property name="PROJECT_ID" value="hello-hystrix-demo"/>
 
-    <logger name="com.netflix.hystrix.AbstractCommand" level="DEBUG">
+    <logger name="com.netflix.hystrix.AbstractCommand"  additivity="false" level="DEBUG">
         <appender-ref ref="CONSOLE" />
     </logger>
 
-
-    <logger name="org.springframework.cloud.sleuth.util" level="ERROR">
+    <logger name="demo.meetup"  additivity="false" level="DEBUG">
         <appender-ref ref="CONSOLE" />
     </logger>
 
-    <logger name="demo.meetup"  level="DEBUG">
+    <logger name="org.apache.camel" additivity="false" level="INFO">
         <appender-ref ref="CONSOLE" />
     </logger>
 
-    <logger name="org.apache.camel" level="INFO">
-        <appender-ref ref="CONSOLE" />
-    </logger>
     <root level="ERROR">
         <appender-ref ref="CONSOLE" />
     </root>
