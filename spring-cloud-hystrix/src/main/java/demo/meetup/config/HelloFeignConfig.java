@@ -7,19 +7,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Configuration for the typical read-only feign client. ie we'll try several times, backing off to 3 seconds etc.
- */
-@Configuration
-public class TestFeignConfig {
 
-    @Value("${feign.test.maxAttempts:2}")
+@Configuration
+public class HelloFeignConfig {
+
+    @Value("${feign.hello.maxAttempts:2}")
     private int maxAttempts;
 
-    @Value("${feign.test.connectTimeout:100}")
+    @Value("${feign.hello.connectTimeout:100}")
     private int connectTimeout;
 
-    @Value("${feign.test.readTimeout:500}")
+    @Value("${feign.hello.readTimeout:500}")
     private int readTimeout;
 
     @Bean
