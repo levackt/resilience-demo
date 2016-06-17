@@ -20,7 +20,6 @@ public class DemoBean {
             LOG.debug("Sleeping for {} millis", delay);
             return "delayed OK";
         } else {
-            LOG.debug("All good");
             return "OK";
         }
     }

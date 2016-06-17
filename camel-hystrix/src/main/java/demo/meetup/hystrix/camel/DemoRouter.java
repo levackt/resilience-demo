@@ -1,10 +1,6 @@
 package demo.meetup.hystrix.camel;
 
-import org.apache.camel.Header;
 import org.apache.camel.builder.RouteBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,8 +8,6 @@ public class DemoRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
-        onException(Exception.class).handled(true);
 
         from("undertow:http://0.0.0.0:8081/demo")
                 .hystrix()
